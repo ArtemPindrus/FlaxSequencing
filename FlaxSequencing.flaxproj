@@ -1,0 +1,31 @@
+﻿{
+	"Name": "FlaxSequencing",
+	"Version": "1.0",
+	"Company": "ArtemPindrus",
+	"Copyright": "",
+	"GameTarget": "FlaxSequencingTarget",
+	"EditorTarget": "FlaxSequencingEditorTarget",
+	"References": [
+		{
+			"Name": "$(EnginePath)/Flax.flaxproj"
+		},
+		{
+			"Name": "$(ProjectPath)/../FlaxTasks/FlaxTasks.flaxproj"
+		}
+	],
+	"DefaultScene": null,
+	"DefaultSceneSpawn": {
+		"Position": {
+			"X": 0.0,
+			"Y": 0.0,
+			"Z": 0.0
+		},
+		"Direction": {
+			"X": 0.0,
+			"Y": 0.0,
+			"Z": 0.0
+		}
+	},
+	"MinEngineVersion": "0.0.6167",
+	"EngineNickname": null
+}
