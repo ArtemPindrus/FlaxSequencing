@@ -40,7 +40,7 @@ public class Sequence : Script
 
             Play(skipUntil + 1, sequenceItems.Count - 1);
         }else {
-            Play(0, sequenceItems.Count - 1);
+            Play();
         }
     }
 
@@ -54,6 +54,20 @@ public class Sequence : Script
         }
     }
 
+    /// <summary>
+    /// Plays the whole sequence.
+    /// </summary>
+    /// <returns></returns>
+    public async Task Play() {
+        Play(0, sequenceItems.Count - 1);
+    }
+
+    /// <summary>
+    /// Plays sequence in a closed interval.
+    /// </summary>
+    /// <param name="startIndex">Inclusive start of interval.</param>
+    /// <param name="endIndex">Inclusive end of interval.</param>
+    /// <returns></returns>
     public async Task Play(int startIndex, int endIndex) {
         for (int i = startIndex; i <= endIndex; i++) {
             var item = sequenceItems[i];
