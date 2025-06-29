@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using FlaxEngine;
-using static FlaxEditor.GUI.ItemsListContextMenu;
 
 namespace Sequencing;
 
@@ -17,7 +15,7 @@ public class Sequence : Script
 
     [Serialize]
     [ShowInEditor]
-    private int tickUntil = -1;
+    private int skipUntil = -1;
 
     [Serialize]
     [ReadOnly]
@@ -34,9 +32,16 @@ public class Sequence : Script
             if (c.TryGetScript(out SequenceEvent si)) sequenceItems.Add(si);
         }
 
-        BringToEndState(tickUntil);
+        var plugin = PluginManager.GetPlugin<FlaxSequencing.FlaxSequencing>();
 
-        Play(tickUntil + 1, sequenceItems.Count - 1);
+        if ((!Engine.IsEditor && plugin.Settings.skipInShipped)
+            || Engine.IsEditor) {
+            BringToEndState(skipUntil);
+
+            Play(skipUntil + 1, sequenceItems.Count - 1);
+        }else {
+            Play(0, sequenceItems.Count - 1);
+        }
     }
 
     /// <summary>
@@ -54,6 +59,8 @@ public class Sequence : Script
             var item = sequenceItems[i];
 
             if (item.IsDebugOnly && !Engine.IsEditor) continue;
+
+            Debug.Log(item.Actor.Name);
 
             currentlyPlaying = item;
 

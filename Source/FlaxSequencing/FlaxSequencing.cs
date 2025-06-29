@@ -1,4 +1,5 @@
 using System;
+using FlaxEditor.Content.Settings;
 using FlaxEngine;
 
 namespace FlaxSequencing
@@ -9,6 +10,8 @@ namespace FlaxSequencing
     /// <seealso cref="FlaxEngine.GamePlugin" />
     public class FlaxSequencing : GamePlugin
     {
+        public FlaxSequencingSettings Settings { get; private set; }
+
         /// <inheritdoc />
         public FlaxSequencing()
         {
@@ -31,6 +34,14 @@ namespace FlaxSequencing
         public override void Initialize()
         {
             base.Initialize();
+
+            var settingsAsset = Engine.GetCustomSettings("FlaxSequencingSettings");
+
+            if (settingsAsset == null) {
+                Debug.LogError("Couldn't find FlaxSequencingSettings custom settings.");
+            }
+
+            Settings = (FlaxSequencingSettings)settingsAsset.Instance;
         }
 
         /// <inheritdoc />
