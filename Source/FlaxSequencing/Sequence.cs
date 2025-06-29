@@ -32,15 +32,17 @@ public class Sequence : Script
             if (c.TryGetScript(out SequenceEvent si)) sequenceItems.Add(si);
         }
 
-        var plugin = PluginManager.GetPlugin<FlaxSequencing.FlaxSequencing>();
+        if (playOnStart) {
+            var plugin = PluginManager.GetPlugin<FlaxSequencing.FlaxSequencing>();
 
-        if ((!Engine.IsEditor && plugin.Settings.skipInShipped)
-            || Engine.IsEditor) {
-            BringToEndState(skipUntil);
+            if ((!Engine.IsEditor && plugin.Settings.skipInShipped)
+                || Engine.IsEditor) {
+                BringToEndState(skipUntil);
 
-            Play(skipUntil + 1, sequenceItems.Count - 1);
-        }else {
-            Play();
+                Play(skipUntil + 1, sequenceItems.Count - 1);
+            } else {
+                Play();
+            }
         }
     }
 
