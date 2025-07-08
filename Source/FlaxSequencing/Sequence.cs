@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using FlaxEngine;
-using static FlaxEditor.GUI.ItemsListContextMenu;
 
 namespace Sequencing;
 
